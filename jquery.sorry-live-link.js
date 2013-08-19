@@ -21,25 +21,25 @@ $(document).ready(function() {
 	  type: "GET",
       dataType: "json",
       crossDomain: true,	  
-	  url: this_link.attr('href'), // Use the href of the status page link.
+	  url: this_link.attr('href') + '?format=json', // Use the href of the status page link.
 	  data: {
 	  	format: 'json' // Not sure why this isn't done by default, maybe cross-domain bug?
 	  },
 	  success: function(data, textStatus, jqXHR) {
 	  	// Fired when the AJAX request for status works just fine.
 	  	// We display an approproriate message based on the status of the page.
-	  	if (data.current_apologies.length == 0) {
+	  	if (data.current_apology_count == 0) {
 	  		// TODO: These classes and messages should be configurable.
 	  		// Add a class to state that all is well.
 	  		this_link.addClass('all-is-well');
 	  		// The status is good, set the appropriate link.
-	  		this_link.html('Current Status: <span>All Is Well.</span>');
+	  		this_link.html('Status: <span>All Is Well.</span>');
 	  	} else {
 	  		// TODO: These classes and messages should be configurable.
 	  		// Add a class for a bad result.
 	  		this_link.addClass('sorry');
 	  		// We have a problem, display the appropriate link message.
-	  		this_link.html('Current Status: <span>Sorry, We Have A Problem.</span>');
+	  		this_link.html('Status: <span>Sorry, We Have A Problem.</span>');
 	  	};
 	  }
 	  // TODO: We need to handle failures and exceptions - even if it is doing so quietly etc.
